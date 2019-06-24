@@ -1,0 +1,57 @@
+﻿@page "/fetchdata"
+@inject HttpClient Http
+@inject IJSRuntime js
+
+
+<h1>Env Files</h1>
+
+<p>Select the file you wish to download</p>
+
+@if (values == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Client ID</th>
+                <th>Details Text</th>
+                <th>State Text</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DRPenv env in values)
+            {
+                <tr>
+                    <td>@env.FILENAMETEXTBOX</td>
+                    <td>@env.CLIENTIDTEXTBOX</td>
+                    <td>@env.DETAILSTEXTBOX</td>
+                    <td>@env.STATETEXTBOX</td>
+                    <td><button onclick=@(new Action(() => download(env)))> Download </button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+DRPenv[] values;
+
+protected override async Task OnInitAsync()
+{
+    values = await Http.GetJsonAsync<DRPenv[]>("https://localhost:44330/api/values");
+}
+
+void download(DRPenv env)
+{
+    string file = DRPenv.ConvertToFile(env);
+    var bytes = System.Text.Encoding.UTF8.GetBytes(file);
+    FileUtil.SaveAs(js, env.FILENAMETEXTBOX + ".env", bytes);
+}
+}
