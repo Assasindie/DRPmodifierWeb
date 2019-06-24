@@ -14,7 +14,9 @@
     </p>
 }
 else
-{
+{   
+    <input type = "text" @bind="filter" placeholder="Search File Name" />
+    <br/>
     <table class="table">
         <thead>
             <tr>
@@ -26,7 +28,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (DRPenv env in values)
+            @foreach (DRPenv env in values.Where(n => n.FILENAMETEXTBOX.Contains(filter)))
             {
                 <tr>
                     <td>@env.FILENAMETEXTBOX</td>
@@ -42,7 +44,7 @@ else
 
 @code {
 DRPenv[] values;
-
+string filter = "";
 protected override async Task OnInitAsync()
 {
     values = await Http.GetJsonAsync<DRPenv[]>("https://drpmodifierapi.azurewebsites.net/api/values");
