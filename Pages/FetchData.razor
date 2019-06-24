@@ -45,7 +45,7 @@ DRPenv[] values;
 
 protected override async Task OnInitAsync()
 {
-    values = await Http.GetJsonAsync<DRPenv[]>("https://localhost:44330/api/values");
+    values = await Http.GetJsonAsync<DRPenv[]>("https://drpmodifierapi.azurewebsites.net/api/values");
 }
 
 void download(DRPenv env)
