@@ -21,8 +21,8 @@ app {
 }
 
     .main .top-row {
-        background-color: #e6e6e6;
-        border-bottom: 1px solid #d6d5d5;
+        background-color: #343a40;
+        border-bottom: 1px solid #000000;
     }
 
 .sidebar {
@@ -96,6 +96,16 @@ app {
     color: red;
 }
 
+body {
+    background-color: #343a40;
+    color: #e5e5e5;
+}
+
+td, th, input {
+    background-color: #343a40;
+    color: #e5e5e5;
+}
+
 @media (max-width: 767.98px) {
     .main .top-row {
         display: none;
@@ -142,7 +152,7 @@ app {
     }
 
         .spinner > div {
-            background-color: #333;
+            background-color: #e5e5e5;
             height: 100%;
             width: 6px;
             display: inline-block;
@@ -169,6 +179,7 @@ app {
             -webkit-animation-delay: -0.8s;
             animation-delay: -0.8s;
         }
+
         .spinner .rect6 {
             -webkit-animation-delay: -0.7s;
             animation-delay: -0.7s;
