@@ -10,13 +10,21 @@
 @if (values == null)
 {
     <p>
-        <em>Loading...</em>
+        <div class="spinner">
+            <p style="font-size:15px"> Loading </p>
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+            <div class="rect6"></div>
+        </div>
     </p>
 }
 else
-{   
-    <input type = "text" @bind="filter" placeholder="Search File Name" />
-    <br/>
+{
+    <input type="text" @bind="filter" placeholder="Search File Name" />
+    <br />
     <table class="table">
         <thead>
             <tr>
@@ -43,17 +51,17 @@ else
 }
 
 @code {
-DRPenv[] values;
-string filter = "";
-protected override async Task OnInitAsync()
-{
-    values = await Http.GetJsonAsync<DRPenv[]>("https://drpmodifierapi.azurewebsites.net/api/values");
-}
+    DRPenv[] values;
+    string filter = "";
+    protected override async Task OnInitAsync()
+    {
+        values = await Http.GetJsonAsync<DRPenv[]>("https://drpmodifierapi.azurewebsites.net/api/values");
+    }
 
-void download(DRPenv env)
-{
-    string file = DRPenv.ConvertToFile(env);
-    var bytes = System.Text.Encoding.UTF8.GetBytes(file);
-    FileUtil.SaveAs(js, env.FILENAMETEXTBOX + ".env", bytes);
-}
+    void download(DRPenv env)
+    {
+        string file = DRPenv.ConvertToFile(env);
+        var bytes = System.Text.Encoding.UTF8.GetBytes(file);
+        FileUtil.SaveAs(js, env.FILENAMETEXTBOX + ".env", bytes);
+    }
 }
