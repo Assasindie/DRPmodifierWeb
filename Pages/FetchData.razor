@@ -11,7 +11,7 @@
 {
     <p>
         <div class="spinner">
-            <p style="font-size:15px"> Loading </p>
+            <p style="font-size:15px"> @loadingtext </p>
             <div class="rect1"></div>
             <div class="rect2"></div>
             <div class="rect3"></div>
@@ -51,17 +51,25 @@ else
 }
 
 @code {
-    DRPenv[] values;
-    string filter = "";
-    protected override async Task OnInitAsync()
+DRPenv[] values;
+string filter = "";
+string loadingtext = "Loading";
+protected override async Task OnInitAsync()
+{
+    try
     {
         values = await Http.GetJsonAsync<DRPenv[]>("https://drpmodifierapi.azurewebsites.net/api/values");
     }
-
-    void download(DRPenv env)
+    catch
     {
-        string file = DRPenv.ConvertToFile(env);
-        var bytes = System.Text.Encoding.UTF8.GetBytes(file);
-        FileUtil.SaveAs(js, env.FILENAMETEXTBOX + ".env", bytes);
+        loadingtext = "Error occured - Refresh Page";
     }
+}
+
+void download(DRPenv env)
+{
+    string file = DRPenv.ConvertToFile(env);
+    var bytes = System.Text.Encoding.UTF8.GetBytes(file);
+    FileUtil.SaveAs(js, env.FILENAMETEXTBOX + ".env", bytes);
+}
 }
