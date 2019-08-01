@@ -1,6 +1,8 @@
 # DRPmodifierWeb
 https://drpmodifierweb.azurewebsites.net/
 
+Permanently down because i am too poor to host.
+
 Blazor website for downloading env files used by https://github.com/Assasindie/discord-rich-presence-modifier. using https://github.com/Assasindie/DRPmodifierAPI for the API.
 ## Requirements
 .NET CORE 3.0
